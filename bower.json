@@ -1,0 +1,14 @@
+{
+  "name": "angular-moment-input",
+  "description": "XXX",
+  "version": "0.1.0",
+  "homepage": "XXX",
+  "license": "MIT",
+  "dependencies": {
+    "angular": "1.4.x",
+    "moment": "2.x"
+  },
+  "devDependencies": {
+    "angular-mocks": "1.4.x"
+  }
+}
