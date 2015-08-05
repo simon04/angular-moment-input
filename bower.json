@@ -1,14 +1,15 @@
 {
   "name": "angular-moment-input",
-  "description": "XXX",
+  "description": "Parses date/time from input using moment",
   "version": "0.1.0",
   "homepage": "XXX",
   "license": "MIT",
+  "main": "./dist/ngMomentInput.min.js",
   "dependencies": {
-    "angular": "1.4.x",
+    "angular": ">1.2.x",
     "moment": "2.x"
   },
   "devDependencies": {
-    "angular-mocks": "1.4.x"
+    "angular-mocks": ">1.2.x"
   }
 }

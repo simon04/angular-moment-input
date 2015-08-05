@@ -2,12 +2,11 @@ language: node_js
 node_js:
   - 0.10
 
-env: BROWSERS=firefox E2E_BROWSERS=Firefox
-
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
-  - npm run update-webdriver
+  - npm install -qg bower gulp-cli
+  - npm install -q
+  - bower install --force
 
-script:
-  - scripts/private/test-all.sh
+script: gulp
