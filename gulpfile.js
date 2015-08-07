@@ -1,5 +1,4 @@
 /* jshint node: true, undef: true, strict: false */
-var fs = require('fs');
 var gulp = require('gulp');
 var karma = require('karma');
 var concat = require('gulp-concat');
@@ -10,7 +9,7 @@ var del = require('del');
 var uglify = require('gulp-uglify');
 
 var config = {
-  pkg: JSON.parse(fs.readFileSync('./package.json')),
+  pkg: require('./package.json'),
   banner:
       '/*!\n' +
       ' * <%= pkg.name %>\n' +
