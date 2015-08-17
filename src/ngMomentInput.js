@@ -7,7 +7,15 @@
   function directive() {
     return {
       require: 'ngModel',
+      scope: {
+        ngMomentInput: '='
+      },
       link: function(scope, elm, attrs, ctrl) {
+
+        var config = angular.extend({
+          formats: ['YYYY-MM-DD'],
+          strict: true
+        }, scope.ngMomentInput);
 
         ctrl.$parsers.push(parse);
         ctrl.$formatters.push(format);
@@ -15,20 +23,14 @@
         scope.$watch(function() {return ctrl.$modelValue;}, repaint, true);
 
         function parse(str) {
-          var formats = [
-            'DD.MM.YYYY HH:mm',
-            'DDMMYYYY HH:mm',
-            'YYYY-MM-DD HHmm',
-            'DD.MM.YYYY HHmm'
-          ];
-          var date = moment(str, formats, true);
+          var date = moment(str, config.formats, config.strict);
           var valid = date.isValid();
           ctrl.$setValidity('date', valid);
           return valid ? date : undefined;
         }
 
         function format(date) {
-          return (date && date.format) ? date.format('DD.MM.YYYY HH:mm') : '';
+          return (date && date.format) ? date.format(config.formats[0]) : '';
         }
 
         function repaint() {
