@@ -1,3 +1,5 @@
+/* eslint-env jasmine, node */
+/* global moment, inject */
 describe('ngMomentInput', function() {
   'use strict';
 

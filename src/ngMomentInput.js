@@ -1,5 +1,6 @@
 (function() {
   'use strict';
+  /* global angular moment */
 
   angular.module('ngMomentInput', []).directive('ngMomentInput', directive);
 

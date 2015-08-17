@@ -1,8 +1,9 @@
-/* jshint node: true, undef: true, strict: false */
+/* eslint strict: 0, no-path-concat: 0 */
+/* eslint-env node */
 var gulp = require('gulp');
 var karma = require('karma');
 var concat = require('gulp-concat');
-var jshint = require('gulp-jshint');
+var eslint = require('gulp-eslint');
 var header = require('gulp-header');
 var rename = require('gulp-rename');
 var del = require('del');
@@ -19,11 +20,11 @@ var config = {
       ' */\n'
 };
 
-gulp.task('default', ['build','test']);
+gulp.task('default', ['build', 'test']);
 gulp.task('build', ['scripts']);
 gulp.task('test', ['build', 'karma']);
 
-gulp.task('watch', ['build','karma-watch'], function() {
+gulp.task('watch', ['build', 'karma-watch'], function() {
   gulp.watch(['src/**/*.{js,html}'], ['build']);
 });
 
@@ -31,11 +32,8 @@ gulp.task('clean', function(done) {
   del(['dist'], done);
 });
 
-gulp.task('scripts', ['clean'], function() {
+gulp.task('scripts', ['clean', 'lint'], function() {
   return gulp.src(['src/**/*.js'])
-    .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(jshint.reporter('fail'))
     .pipe(concat('ngMomentInput.js'))
     .pipe(header(config.banner, {
       timestamp: (new Date()).toISOString(),
@@ -43,9 +41,16 @@ gulp.task('scripts', ['clean'], function() {
     }))
     .pipe(gulp.dest('dist'))
     .pipe(uglify({preserveComments: 'some'}))
-    .pipe(rename({extname:'.min.js'}))
+    .pipe(rename({extname: '.min.js'}))
     .pipe(gulp.dest('dist'));
 
+});
+
+gulp.task('lint', function() {
+  return gulp.src(['src/**/*.js', 'test/**/*.js', '*.js'])
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failOnError());
 });
 
 gulp.task('karma', ['build'], function(done) {
