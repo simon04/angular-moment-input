@@ -2,7 +2,8 @@
   "name": "angular-moment-input",
   "version": "0.1.0",
   "description": "Parses date/time from input using moment",
-  "repository": "XXX",
+  "homepage": "https://github.com/simon04/angular-moment-input",
+  "repository": "https://github.com/simon04/angular-moment-input.git",
   "license": "MIT",
   "devDependencies": {
     "bower": "~1.4",
