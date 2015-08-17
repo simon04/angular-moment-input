@@ -13,6 +13,7 @@
       link: function(scope, elm, attrs, ctrl) {
 
         var config = angular.extend({
+          moment: moment,
           formats: ['YYYY-MM-DD'],
           strict: true
         }, scope.ngMomentInput);
@@ -23,7 +24,7 @@
         scope.$watch(function() {return ctrl.$modelValue;}, repaint, true);
 
         function parse(str) {
-          var date = moment(str, config.formats, config.strict);
+          var date = config.moment(str, config.formats, config.strict);
           var valid = date.isValid();
           ctrl.$setValidity('date', valid);
           return valid ? date : undefined;

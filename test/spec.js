@@ -48,4 +48,13 @@ describe('ngMomentInput', function() {
     expect(input.val()).toBe('01.02.2016 12:34');
   });
 
+  it('should parse a date in UTC mode', function() {
+    scope.config = {moment: moment.utc};
+    var input = compileElement(inputHtml);
+    scope.$apply('x = undefined;');
+    input.val('2015-02-01').triggerHandler('input');
+    expect(moment.isMoment(scope.x)).toBe(true);
+    expect(scope.x.format()).toBe('2015-02-01T00:00:00+00:00');
+  });
+
 });
