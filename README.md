@@ -4,10 +4,17 @@ Parses date/time from input using moment
 
 ## Usage
 
+Obtain module
+```sh
+$ bower install --save angular-moment-input
+```
+
+Add module dependency to angular app
 ```js
 angular.module('...', ['angular-moment-input'])
 ```
 
+Use directive `ng-moment-input` (together with an `ng-model`)
 ```html
 <input ng-model="..." ng-moment-input="config">
 ```
